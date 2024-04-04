@@ -20,6 +20,7 @@ export default function CourseRoutes(app) {
     //       .filter((c) => c._id !== id);
     //     res.sendStatus(204);
     //   });    
+    
 
     const updateCourse = (req, res) => {
       const id = req.params.id;

@@ -1,9 +1,9 @@
 import express from 'express';
 import Hello from './Hello.js';
 import Lab5 from './Lab5.js';
-import CourseRoutes from './Kanbas/courses/routes.js';
-import ModuleRoutes from './Kanbas/modules/routes.js';
-import AssignmentRoutes from './Kanbas/assignments/routes.js';
+import CourseRoutes from './Kanbas/courses/coursesRoutes.js';
+import ModuleRoutes from './Kanbas/modules/moduleRoutes.js';
+import AssignmentRoutes from './Kanbas/assignments/assignmentRoutes.js';
 
 import cors from 'cors';
 

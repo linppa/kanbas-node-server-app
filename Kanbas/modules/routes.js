@@ -13,8 +13,6 @@ function ModuleRoutes(app) {
         res.sendStatus(204);
     });
 
-
-
     // delete module from database
     const deleteModule = (req, res) => {
         const id = req.params.id;

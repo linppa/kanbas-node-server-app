@@ -43,20 +43,50 @@ export default function UserRoutes(app) {
     };
     app.put("/api/users/:userId", updateUser);
 
-    const signup = async (req, res) => { };
+    const signup = async (req, res) => {
+        const user = await dao.findUserByUsername(req.body.username);
+        if (user) {
+            res.status(400).json(
+                { message: "Username already taken" });
+        }
+        // const currentUser = await dao.createUser(req.body);
+        // req.session["currentUser"] = currentUser;
+        // res.json(currentUser);
+        currentUser = await dao.createUser(req.body);
+        res.json(currentUser);
+    };
     app.post("/api/users/signup", signup);
 
     const signin = async (req, res) => {
+        // const { username, password } = req.body;
+        // currentUser = await dao.findUserByCredentials(username, password);
+        // res.json(currentUser);
         const { username, password } = req.body;
-        currentUser = await dao.findUserByCredentials(username, password);
-        res.json(currentUser);
+        const currentUser = await dao.findUserByCredentials(username, password);
+        if (currentUser) {
+            req.session["currentUser"] = currentUser;
+            res.json(currentUser);
+            console.log(currentUser);
+        } else {
+            res.sendStatus(401).json({ message: "Invalid username or password." });
+        }
     };
     app.post("/api/users/signin", signin);
 
-    const signout = (req, res) => { };
+    const signout = (req, res) => {
+        currentUser = null;
+        req.session.destroy(); 
+        res.sendStatus(200);
+    };
     app.post("/api/users/signout", signout);
 
     const profile = async (req, res) => {
+        // res.json(currentUser);
+        const currentUser = req.session["currentUser"];
+        if (!currentUser) {
+            res.sendStatus(401);
+            return;
+        }
         res.json(currentUser);
     };
     app.post("/api/users/profile", profile);

@@ -11,7 +11,10 @@ import cors from 'cors';
 
 mongoose.connect("mongodb://127.0.0.1:27017/kanbas");
 const app = express();
-app.use(cors());
+app.use(cors({
+    credentials: true,
+    origin: process.env.FRONTEND_URL || "http://localhost:3000"
+}));
 app.use(express.json());
 UserRoutes(app);
 

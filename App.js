@@ -6,15 +6,43 @@ import ModuleRoutes from './Kanbas/modules/moduleRoutes.js';
 import AssignmentRoutes from './Kanbas/assignments/assignmentRoutes.js';
 import mongoose from 'mongoose';
 import UserRoutes from "./Users/routes.js";
-
 import cors from 'cors';
+import session from 'express-session';
+import dotenv from 'dotenv';
+dotenv.config();
 
-mongoose.connect("mongodb://127.0.0.1:27017/kanbas");
+// mongoose.connect("mongodb://127.0.0.1:27017/kanbas");
+
+const CONNECTION_STRING =
+    process.env.DB_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kanbas";
+console.log(CONNECTION_STRING);
+console.log(process.env.FRONTEND_URL)
+mongoose.connect(CONNECTION_STRING);
+
+
 const app = express();
-app.use(cors({
-    credentials: true,
-    origin: process.env.FRONTEND_URL || "http://localhost:3000"
-}));
+app.use(
+    cors({
+        credentials: true,
+        origin: process.env.FRONTEND_URL,
+    })
+);
+
+const sessionOptions = {
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+};
+if (process.env.NODE_ENV !== "development") {
+    sessionOptions.proxy = true;
+    sessionOptions.cookie = {
+        sameSite: "none",
+        secure: true,
+    };
+}
+
+app.use(session(sessionOptions));
+
 app.use(express.json());
 UserRoutes(app);
 

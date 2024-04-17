@@ -9,7 +9,10 @@ export default function UserRoutes(app) {
     };
     app.post("/api/users", createUser);
 
-    const deleteUser = async (req, res) => { };
+    const deleteUser = async (req, res) => {
+        const status = await dao.deleteUser(req.params.userId);
+        res.json(status);
+    };
     app.delete("/api/users/:userId", deleteUser);
 
     const findAllUsers = async (req, res) => {
@@ -18,7 +21,11 @@ export default function UserRoutes(app) {
     };
     app.get("/api/users", findAllUsers);
 
-    const findUserById = async (req, res) => { };
+    const findUserById = async (req, res) => {
+        const user = await dao.findUserById(req.params.userId);
+        res.json(user);
+
+    };
     app.get("/api/users/:userId", findUserById);
 
     const updateUser = async (req, res) => {

@@ -11,10 +11,11 @@ import session from 'express-session';
 import dotenv from 'dotenv';
 dotenv.config();
 
-// mongoose.connect("mongodb://127.0.0.1:27017/kanbas");
+DB_CONNECTION_STRING = process.env.DB_CONNECTION_STRING || "mongodb+srv://linppa:starry1996@kanbas.t9uxn1e.mongodb.net/?retryWrites=true&w=majority"
 
 const CONNECTION_STRING =
-    process.env.DB_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kanbas";
+    DB_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kanbas";
+
 console.log(CONNECTION_STRING);
 console.log(process.env.FRONTEND_URL)
 mongoose.connect(CONNECTION_STRING);

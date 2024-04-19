@@ -1,8 +1,8 @@
 import express from 'express';
 import Hello from './Hello.js';
 import Lab5 from './Lab5.js';
-import CourseRoutes from './Kanbas/courses/coursesRoutes.js';
-import ModuleRoutes from './Kanbas/modules/moduleRoutes.js';
+import CourseRoutes from './Kanbas/courses/routes.js';
+import ModuleRoutes from './Kanbas/modules/routes.js';
 import AssignmentRoutes from './Kanbas/assignments/assignmentRoutes.js';
 import mongoose from 'mongoose';
 import UserRoutes from "./Users/routes.js";
@@ -11,10 +11,8 @@ import session from 'express-session';
 import dotenv from 'dotenv';
 dotenv.config();
 
-DB_CONNECTION_STRING = process.env.DB_CONNECTION_STRING || "mongodb+srv://linppa:starry1996@kanbas.t9uxn1e.mongodb.net/?retryWrites=true&w=majority"
-
-const CONNECTION_STRING =
-    DB_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kanbas";
+const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || 'mongodb://127.0.0.1:27017/kanbas';
+mongoose.connect(CONNECTION_STRING);
 
 console.log(CONNECTION_STRING);
 console.log(process.env.FRONTEND_URL)

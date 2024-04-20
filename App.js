@@ -1,9 +1,13 @@
 import express from 'express';
 import Hello from './Hello.js';
 import Lab5 from './Lab5.js';
-import CourseRoutes from './Kanbas/courses/routes.js';
-import ModuleRoutes from './Kanbas/modules/routes.js';
+
+import CourseRoutes from './Kanbas/courses/coursesRoutes.js';
+import ModuleRoutes from './Kanbas/modules/moduleRoutes.js';
 import AssignmentRoutes from './Kanbas/assignments/assignmentRoutes.js';
+import QuestionRoutes from './Kanbas/questions/routes.js';
+import QuizRoutes from './Kanbas/quizzes/quizzesRoute.js';
+
 import mongoose from 'mongoose';
 import UserRoutes from "./Users/routes.js";
 import cors from 'cors';
@@ -27,27 +31,29 @@ app.use(
     })
 );
 
-const sessionOptions = {
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-};
-if (process.env.NODE_ENV !== "development") {
-    sessionOptions.proxy = true;
-    sessionOptions.cookie = {
-        sameSite: "none",
-        secure: true,
-    };
-}
+// const sessionOptions = {
+//     secret: process.env.SESSION_SECRET,
+//     resave: false,
+//     saveUninitialized: false,
+// };
+// if (process.env.NODE_ENV !== "development") {
+//     sessionOptions.proxy = true;
+//     sessionOptions.cookie = {
+//         sameSite: "none",
+//         secure: true,
+//     };
+// }
 
-app.use(session(sessionOptions));
+// app.use(session(sessionOptions));
 
-app.use(express.json());
+// app.use(express.json());
+
 UserRoutes(app);
-
 ModuleRoutes(app);
 CourseRoutes(app);
 AssignmentRoutes(app);
+QuestionRoutes(app);
+QuizRoutes(app);
 
 Lab5(app);
 Hello(app);

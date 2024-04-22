@@ -5,6 +5,7 @@ import CourseRoutes from './Kanbas/courses/coursesRoutes.js';
 import ModuleRoutes from './Kanbas/modules/moduleRoutes.js';
 import AssignmentRoutes from './Kanbas/assignments/assignmentRoutes.js';
 import QuizRoutes from './Kanbas/quizzes/quizRoutes.js';
+import QuestionRoutes from './Kanbas/quizzes/questionRoutes.js';
 
 import cors from 'cors';
 
@@ -16,6 +17,7 @@ ModuleRoutes(app);
 CourseRoutes(app);
 AssignmentRoutes(app);
 QuizRoutes(app);
+QuestionRoutes(app);
 
 Lab5(app);
 Hello(app);

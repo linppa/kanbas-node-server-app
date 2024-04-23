@@ -4,6 +4,7 @@ import Lab5 from './Lab5.js';
 import CourseRoutes from './Kanbas/courses/coursesRoutes.js';
 import ModuleRoutes from './Kanbas/modules/moduleRoutes.js';
 import AssignmentRoutes from './Kanbas/assignments/assignmentRoutes.js';
+import UserRoutes from './Kanbas/users/userRoutes.js';
 import QuizRoutes from './Kanbas/quizzes/quizRoutes.js';
 import QuestionRoutes from './Kanbas/quizzes/questionRoutes.js';
 
@@ -16,6 +17,7 @@ app.use(express.json());
 ModuleRoutes(app);
 CourseRoutes(app);
 AssignmentRoutes(app);
+UserRoutes(app);
 QuizRoutes(app);
 QuestionRoutes(app);
 
